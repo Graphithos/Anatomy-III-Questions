@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQs on Anatomy 3 Lecture No. 8 Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f5f7fa;
+            --container-bg: white;
+            --text-color: #333;
+            --border-color: #ddd;
+            --primary-color: #3498db;
+            --header-color: #2c3e50;
+            --secondary-text: #7f8c8d;
+            --progress-bg: #ecf0f1;
+            --question-bg: #f8f9fa;
+            --option-bg: #fff;
+            --option-hover: #f1f8ff;
+            --option-selected: #d1ecf1;
+            --correct-bg: #d4edda;
+            --correct-border: #28a745;
+            --incorrect-bg: #f8d7da;
+            --incorrect-border: #dc3545;
+            --button-bg: #3498db;
+            --button-hover: #2980b9;
+            --button-disabled: #bdc3c7;
+            --restart-bg: #2ecc71;
+            --restart-hover: #27ae60;
+            --review-bg: #f39c12;
+            --review-hover: #e67e22;
+            --toggle-bg: #ecf0f1;
+            --toggle-slider: white;
+            --toggle-text: #7f8c8d;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a2e;
+            --container-bg: #16213e;
+            --text-color: #e6e6e6;
+            --border-color: #394867;
+            --primary-color: #4cc9f0;
+            --header-color: #e6e6e6;
+            --secondary-text: #a9a9a9;
+            --progress-bg: #394867;
+            --question-bg: #1f4068;
+            --option-bg: #16213e;
+            --option-hover: #1f4068;
+            --option-selected: #1f4068;
+            --correct-bg: #2d5a2d;
+            --correct-border: #4caf50;
+            --incorrect-bg: #5a2d2d;
+            --incorrect-border: #f44336;
+            --button-bg: #4cc9f0;
+            --button-hover: #3aa8d0;
+            --button-disabled: #5d6d7e;
+            --restart-bg: #2ecc71;
+            --restart-hover: #27ae60;
+            --review-bg: #f39c12;
+            --review-hover: #e67e22;
+            --toggle-bg: #394867;
+            --toggle-slider: #4cc9f0;
+            --toggle-text: #e6e6e6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            position: relative;
+        }
+        h1 {
+            color: var(--header-color);
+            margin-bottom: 5px;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        .author {
+            color: var(--secondary-text);
+            font-style: italic;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .description {
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 35px; /* Adjusted to align with author name */
+            right: 0;
+            display: flex;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 120px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-bg);
+            transition: .4s;
+            border-radius: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--toggle-text);
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 60px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--toggle-slider);
+            transition: .4s;
+            border-radius: 34px;
+            z-index: 1;
+        }
+        .slider-text {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .light-text, .dark-text {
+            transition: opacity 0.3s;
+        }
+        .dark-mode .light-text {
+            opacity: 0.5;
+        }
+        .light-text {
+            opacity: 0.5;
+        }
+        .dark-mode .dark-text {
+            opacity: 1;
+        }
+        .dark-text {
+            opacity: 0.5;
+        }
+        input:checked + .slider:before {
+            transform: translateX(52px);
+        }
+        .progress-container {
+            background: var(--progress-bg);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 10px;
+            transition: background-color 0.3s;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--header-color);
+            transition: color 0.3s;
+        }
+        .question {
+            background: var(--question-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background-color 0.3s;
+        }
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .option {
+            padding: 12px 15px;
+            background: var(--option-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            background: var(--option-hover);
+            border-color: var(--primary-color);
+        }
+        .option.selected {
+            background: var(--option-selected);
+            border-color: var(--primary-color);
+        }
+        .option.correct {
+            background: var(--correct-bg);
+            border-color: var(--correct-border);
+        }
+        .option.incorrect {
+            background: var(--incorrect-bg);
+            border-color: var(--incorrect-border);
+        }
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .feedback.correct {
+            background: var(--correct-bg);
+            color: var(--text-color);
+            border: 1px solid var(--correct-border);
+            display: block;
+        }
+        .feedback.incorrect {
+            background: var(--incorrect-bg);
+            color: var(--text-color);
+            border: 1px solid var(--incorrect-border);
+            display: block;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: var(--button-hover);
+        }
+        button:disabled {
+            background: var(--button-disabled);
+            cursor: not-allowed;
+        }
+        .results {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        .score {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--header-color);
+        }
+        .score-value {
+            font-size: 48px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--restart-bg);
+        }
+        .restart-btn:hover {
+            background: var(--restart-hover);
+        }
+        .review-btn {
+            margin-top: 20px;
+            background: var(--review-bg);
+        }
+        .review-btn:hover {
+            background: var(--review-hover);
+        }
+        .review-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--question-bg);
+            border-radius: 8px;
+            display: none;
+        }
+        .review-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--header-color);
+            text-align: center;
+        }
+        .review-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid var(--incorrect-border);
+            background: var(--container-bg);
+            border-radius: 4px;
+        }
+        .review-question-number {
+            font-weight: bold;
+            color: var(--incorrect-border);
+            margin-bottom: 8px;
+        }
+        .review-question-text {
+            margin-bottom: 10px;
+        }
+        .review-answer {
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .review-correct {
+            color: var(--correct-border);
+        }
+        .review-explanation {
+            margin-top: 5px;
+            font-style: italic;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MCQs on Anatomy 3 Lecture No. 8 Quiz</h1>
+            <p class="author">Dr. Samy Salem</p>
+            <p class="description">Test your knowledge of Anatomy 3 (Cerebral Hemisphere Surfaces, Sulci, and Gyri)</p>
+            <div class="theme-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <span class="slider">
+                        <div class="slider-text">
+                            <span class="light-text">Light</span>
+                            <span class="dark-text">Dark</span>
+                        </div>
+                    </span>
+                </label>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="stats">
+            <div>Question: <span id="current-question">1</span>/<span id="total-questions">25</span></div>
+            <div>Score: <span id="score">0</span>/<span id="total-score">25</span></div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <div class="navigation">
+            <button id="prev-btn" disabled>Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="score">Your Score: <span class="score-value" id="final-score">0</span>/25</div>
+            <p id="performance-message"></p>
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+            <button class="review-btn" id="review-btn">Review Incorrect Answers</button>
+        </div>
+
+        <div id="review-section" class="review-section">
+            <h2 class="review-title">Questions Answered Incorrectly</h2>
+            <div id="incorrect-questions-list"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data (25 questions from the PDF)
+        const quizData = [
+            {
+                question: "How many surfaces does the cerebral hemisphere have?",
+                options: [
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                answer: 1,
+                explanation: "B) 3 (Page 2)"
+            },
+            {
+                question: "Which of the following is NOT one of the three poles of the cerebral hemisphere?",
+                options: [
+                    "Frontal pole",
+                    "Temporal pole",
+                    "Occipital pole",
+                    "Parietal pole"
+                ],
+                answer: 3,
+                explanation: "D) Parietal pole (Page 2)"
+            },
+            {
+                question: "The Central Sulcus extends for a short distance onto which structure on the medial surface?",
+                options: [
+                    "Cingulate gyrus",
+                    "Para-central lobule",
+                    "Pre-cuneus",
+                    "Cuneus"
+                ],
+                answer: 1,
+                explanation: "B) Para-central lobule (Page 4)"
+            },
+            {
+                question: "The lateral sulcus (Sylvian fissure) consists of a stem and how many rami?",
+                options: [
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                answer: 1,
+                explanation: "B) 3 (Page 5)"
+            },
+            {
+                question: "Which ramus of the lateral sulcus runs backwards for approximately 8 cm, separating the frontal and parietal lobes from the temporal lobe?",
+                options: [
+                    "Anterior ramus",
+                    "Ascending ramus",
+                    "Posterior ramus",
+                    "Horizontal ramus"
+                ],
+                answer: 2,
+                explanation: "C) Posterior ramus (Page 5)"
+            },
+            {
+                question: "The Parieto-occipital sulcus is primarily located on which surface?",
+                options: [
+                    "Lateral surface",
+                    "Medial surface",
+                    "Inferior surface",
+                    "Superolateral surface"
+                ],
+                answer: 1,
+                explanation: "B) Medial surface (Page 6)"
+            },
+            {
+                question: "What forms the posterior boundary of the frontal lobe on the lateral surface?",
+                options: [
+                    "Central sulcus",
+                    "Lateral sulcus",
+                    "Pre-central sulcus",
+                    "Parieto-occipital sulcus"
+                ],
+                answer: 0,
+                explanation: "A) Central sulcus (Page 8)"
+            },
+            {
+                question: "Which lobe is bounded above by the posterior ramus of the lateral sulcus and behind by the lower half of a line from the parieto-occipital sulcus to the pre-occipital notch?",
+                options: [
+                    "Frontal lobe",
+                    "Parietal lobe",
+                    "Temporal lobe",
+                    "Occipital lobe"
+                ],
+                answer: 2,
+                explanation: "C) Temporal lobe (Page 8)"
+            },
+            {
+                question: "The occipital lobe is bounded in front by:",
+                options: [
+                    "The central sulcus",
+                    "The lateral sulcus",
+                    "A line from the parieto-occipital sulcus to the pre-occipital notch",
+                    "The calcarine sulcus"
+                ],
+                answer: 2,
+                explanation: "C) A line from the parieto-occipital sulcus to the pre-occipital notch (Page 8)"
+            },
+            {
+                question: "Which sulcus runs parallel to and in front of the central sulcus in the frontal lobe?",
+                options: [
+                    "Post-central sulcus",
+                    "Intra-parietal sulcus",
+                    "Pre-central sulcus",
+                    "Superior frontal sulcus"
+                ],
+                answer: 2,
+                explanation: "C) Pre-central sulcus (Page 11)"
+            },
+            {
+                question: "In the parietal lobe, the sulcus that runs from before backwards, behind the central sulcus is the:",
+                options: [
+                    "Post-central sulcus",
+                    "Intra-parietal sulcus",
+                    "Marginal sulcus",
+                    "Supra-marginal sulcus"
+                ],
+                answer: 1,
+                explanation: "B) Intra-parietal sulcus (Page 11)"
+            },
+            {
+                question: "Which gyrus lies between the central and post-central sulci?",
+                options: [
+                    "Pre-central gyrus",
+                    "Supra-marginal gyrus",
+                    "Angular gyrus",
+                    "Post-central gyrus"
+                ],
+                answer: 3,
+                explanation: "D) Post-central gyrus (Page 15)"
+            },
+            {
+                question: "The gyrus that arches above the end of the posterior ramus of the lateral sulcus is the:",
+                options: [
+                    "Angular gyrus",
+                    "Supra-marginal gyrus",
+                    "Superior temporal gyrus",
+                    "Inferior parietal lobule"
+                ],
+                answer: 1,
+                explanation: "B) Supra-marginal gyrus (Page 15)"
+            },
+            {
+                question: "The gyrus that arches over the end of the superior temporal sulcus is the:",
+                options: [
+                    "Supra-marginal gyrus",
+                    "Angular gyrus",
+                    "Middle temporal gyrus",
+                    "Inferior frontal gyrus"
+                ],
+                answer: 1,
+                explanation: "B) Angular gyrus (Page 15)"
+            },
+            {
+                question: "Which sulcus lies above the corpus callosum on the medial surface?",
+                options: [
+                    "Callosal sulcus",
+                    "Cingulate sulcus",
+                    "Hippocampal sulcus",
+                    "Calcarine sulcus"
+                ],
+                answer: 0,
+                explanation: "A) Callosal sulcus (Page 18)"
+            },
+            {
+                question: "The cingulate sulcus gives off an ascending branch opposite which part of the corpus callosum?",
+                options: [
+                    "The rostrum",
+                    "The genu",
+                    "The middle (body)",
+                    "The splenium"
+                ],
+                answer: 2,
+                explanation: "C) The middle (body) (Page 18)"
+            },
+            {
+                question: "Opposite the splenium, the cingulate sulcus ends by dividing into the marginal sulcus and which other sulcus?",
+                options: [
+                    "Calcarine sulcus",
+                    "Sub-parietal (supra-splenial) sulcus",
+                    "Collateral sulcus",
+                    "Varieto-occipital sulcus"
+                ],
+                answer: 1,
+                explanation: "B) Sub-parietal (supra-splenial) sulcus (Page 19)"
+            },
+            {
+                question: "The calcarine sulcus is divided into which two parts?",
+                options: [
+                    "Internal and external",
+                    "Superior and inferior",
+                    "Medial and lateral",
+                    "Pre-calcarine and post-calcarine"
+                ],
+                answer: 3,
+                explanation: "D) Pre-calcarine and post-calcarine (Page 19)"
+            },
+            {
+                question: "Which gyrus lies between the cingulate and callosal sulci?",
+                options: [
+                    "Lingual gyrus",
+                    "Cingulate gyrus",
+                    "Para-central lobule",
+                    "Cuneus"
+                ],
+                answer: 1,
+                explanation: "B) Cingulate gyrus (Page 22)"
+            },
+            {
+                question: "The cingulate gyrus curves behind the splenium to join the para-hippocampal gyrus via a connecting structure called the:",
+                options: [
+                    "Isthmus",
+                    "Uncus",
+                    "Fornix",
+                    "Fimbria"
+                ],
+                answer: 0,
+                explanation: "A) Isthmus (Page 22)"
+            },
+            {
+                question: "The wedge-shaped area on the medial surface lying between the calcarine and parieto-occipital sulci is the:",
+                options: [
+                    "Pre-cuneus",
+                    "Cuneus",
+                    "Lingual gyrus",
+                    "Para-central lobule"
+                ],
+                answer: 1,
+                explanation: "B) Cuneus (Page 22)"
+            },
+            {
+                question: "The quadrilateral area lying in front of the cuneus on the medial surface is the:",
+                options: [
+                    "Pre-cuneus",
+                    "Lingual gyrus",
+                    "Para-central lobule",
+                    "Medial frontal gyrus"
+                ],
+                answer: 0,
+                explanation: "A) Pre-cuneus (Page 22)"
+            },
+            {
+                question: "Which structure on the medial surface receives the termination of the central sulcus?",
+                options: [
+                    "Cingulate gyrus",
+                    "Pre-cuneus",
+                    "Para-central lobule",
+                    "Cuneus"
+                ],
+                answer: 2,
+                explanation: "C) Para-central lobule (Page 23)"
+            },
+            {
+                question: "The para-central lobule consists of the continuation of which gyri from the lateral surface?",
+                options: [
+                    "Superior and middle frontal gyri",
+                    "Pre-central and post-central gyri",
+                    "Superior and inferior parietal lobules",
+                    "Supra-marginal and angular gyri"
+                ],
+                answer: 1,
+                explanation: "B) Pre-central and post-central gyri (Page 23)"
+            },
+            {
+                question: "The gyrus lying between the calcarine and collateral sulci on the medial/inferior aspect is the:",
+                options: [
+                    "Cuneus",
+                    "Fusiform gyrus",
+                    "Para-hippocampal gyrus",
+                    "Lingual gyrus"
+                ],
+                answer: 3,
+                explanation: "D) Lingual gyrus (Page 22)"
+            }
+        ];
+
+        // Quiz state variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let incorrectQuestions = [];
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const totalScoreEl = document.getElementById('total-score');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreEl = document.getElementById('final-score');
+        const performanceMessageEl = document.getElementById('performance-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const reviewBtn = document.getElementById('review-btn');
+        const reviewSection = document.getElementById('review-section');
+        const incorrectQuestionsList = document.getElementById('incorrect-questions-list');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const lightText = document.querySelector('.light-text');
+        const darkText = document.querySelector('.dark-text');
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = quizData.length;
+            totalScoreEl.textContent = quizData.length;
+            showQuestion();
+            updateProgressBar();
+            
+            // Initialize dark mode based on system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.checked = true;
+                updateToggleText(true);
+            } else {
+                updateToggleText(false);
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+            reviewBtn.addEventListener('click', showIncorrectQuestions);
+            darkModeToggle.addEventListener('change', toggleDarkMode);
+        }
+
+        // Toggle dark mode
+        function toggleDarkMode() {
+            const isDarkMode = darkModeToggle.checked;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            updateToggleText(isDarkMode);
+        }
+
+        // Update toggle text opacity
+        function updateToggleText(isDarkMode) {
+            if (isDarkMode) {
+                lightText.style.opacity = '0.5';
+                darkText.style.opacity = '1';
+            } else {
+                lightText.style.opacity = '1';
+                darkText.style.opacity = '0.5';
+            }
+        }
+
+        // Show current question
+        function showQuestion() {
+            currentQuestionEl.textContent = currentQuestion + 1;
+            scoreEl.textContent = score;
+            
+            const question = quizData[currentQuestion];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                let optionClass = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionClass += ' selected';
+                    if (index === question.answer) {
+                        optionClass += ' correct';
+                    } else {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        ${String.fromCharCode(65 + index)}) ${option}
+                    </div>
+                `;
+            });
+            
+            let feedbackHTML = '';
+            if (userAnswers[currentQuestion] !== null) {
+                const isCorrect = userAnswers[currentQuestion] === question.answer;
+                feedbackHTML = `
+                    <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                        ${isCorrect ? '✓ Correct!' : '✗ Incorrect!'} 
+                        ${!isCorrect ? `Correct answer: ${String.fromCharCode(65 + question.answer)}) ${question.options[question.answer]}` : ''}
+                        <br><br>Explanation: ${question.explanation}
+                    </div>
+                `;
+            }
+            
+            quizContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1}/${quizData.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                    ${feedbackHTML}
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const optionElements = quizContainer.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next';
+        }
+
+        // Select an option
+        function selectOption(e) {
+            if (userAnswers[currentQuestion] !== null) return; // Already answered
+            
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Check if answer is correct
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                // Add to incorrect questions list
+                incorrectQuestions.push({
+                    question: quizData[currentQuestion].question,
+                    userAnswer: selectedIndex,
+                    correctAnswer: quizData[currentQuestion].answer,
+                    options: quizData[currentQuestion].options,
+                    explanation: quizData[currentQuestion].explanation,
+                    questionNumber: currentQuestion + 1
+                });
+            }
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            
+            finalScoreEl.textContent = score;
+            
+            // Performance message
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 80) {
+                message = 'Excellent! You have a strong understanding of Anatomy 3 (Cerebral Hemisphere Surfaces, Sulci, and Gyri).';
+            } else if (percentage >= 60) {
+                message = 'Good job! You have a solid grasp of the material.';
+            } else if (percentage >= 40) {
+                message = 'Not bad! Review the material and try again.';
+            } else {
+                message = 'Keep studying! Review the lectures and try again.';
+            }
+            
+            performanceMessageEl.textContent = message;
+            resultsContainer.style.display = 'block';
+            
+            // Show review button only if there are incorrect answers
+            if (incorrectQuestions.length > 0) {
+                reviewBtn.style.display = 'inline-block';
+            } else {
+                reviewBtn.style.display = 'none';
+            }
+        }
+
+        // Show incorrect questions
+        function showIncorrectQuestions() {
+            resultsContainer.style.display = 'none';
+            reviewSection.style.display = 'block';
+            
+            let incorrectHTML = '';
+            incorrectQuestions.forEach((item, index) => {
+                incorrectHTML += `
+                    <div class="review-question">
+                        <div class="review-question-number">Question ${item.questionNumber}</div>
+                        <div class="review-question-text">${item.question}</div>
+                        <div>Your answer: ${String.fromCharCode(65 + item.userAnswer)}) ${item.options[item.userAnswer]}</div>
+                        <div class="review-answer review-correct">Correct answer: ${String.fromCharCode(65 + item.correctAnswer)}) ${item.options[item.correctAnswer]}</div>
+                        <div class="review-explanation">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            
+            incorrectQuestionsList.innerHTML = incorrectHTML;
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            incorrectQuestions = [];
+            
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.stats').style.display = 'flex';
+            resultsContainer.style.display = 'none';
+            reviewSection.style.display = 'none';
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Initialize the quiz when the page loads
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>

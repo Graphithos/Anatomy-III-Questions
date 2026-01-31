@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy 3 Lecture No. 2 MCQs Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .author {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #3498db;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .question-number {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .option {
+            padding: 12px 15px;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            background: #f1f8ff;
+            border-color: #a3d0fd;
+        }
+        .option.selected {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .results {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        .score {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .score-value {
+            font-size: 48px;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: #2ecc71;
+        }
+        .restart-btn:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Anatomy 3 Lecture No. 2 MCQs Quiz</h1>
+            <p class="author">Dr. Samy Salem</p>
+            <p class="description">Test your knowledge of Anatomy 3 Lecture No. 2</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="stats">
+            <div>Question: <span id="current-question">1</span>/<span id="total-questions">30</span></div>
+            <div>Score: <span id="score">0</span>/<span id="total-score">30</span></div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <div class="navigation">
+            <button id="prev-btn" disabled>Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="score">Your Score: <span class="score-value" id="final-score">0</span>/30</div>
+            <p id="performance-message"></p>
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "Which bone is NOT a component of Norma Frontalis?",
+                options: [
+                    "Frontal bone",
+                    "Nasal bone",
+                    "Parietal bone",
+                    "Zygomatic bone"
+                ],
+                answer: 2,
+                explanation: "Parietal bone (Page 5)"
+            },
+            {
+                question: "The two elevations, one on each side of the frontal bone, are known as the:",
+                options: [
+                    "Superciliary arches",
+                    "Frontal eminences",
+                    "Zygomatic arches",
+                    "Mastoid processes"
+                ],
+                answer: 1,
+                explanation: "Frontal eminences (Page 7)"
+            },
+            {
+                question: "The prominence above the orbital cavity that may present a notch or foramen is the:",
+                options: [
+                    "Superciliary arch",
+                    "Supraorbital margin",
+                    "Zygomatic arch",
+                    "Infraorbital margin"
+                ],
+                answer: 1,
+                explanation: "Supraorbital margin (Page 7)"
+            },
+            {
+                question: "The two prominences below the frontal eminences that join in the midline at the glabella are the:",
+                options: [
+                    "Frontal tuberosities",
+                    "Supraorbital margins",
+                    "Superciliary arches",
+                    "Nasal bones"
+                ],
+                answer: 2,
+                explanation: "Superciliary arches (Page 7)"
+            },
+            {
+                question: "The point of meeting of the frontonasal and internasal sutures is called the:",
+                options: [
+                    "Nasion",
+                    "Bregma",
+                    "Lambda",
+                    "Pterion"
+                ],
+                answer: 0,
+                explanation: "Nasion (Page 8)"
+            },
+            {
+                question: "Which foramen transmits the infraorbital nerve and vessels?",
+                options: [
+                    "Supraorbital foramen",
+                    "Zygomaticofacial foramen",
+                    "Infraorbital foramen",
+                    "Stylomastoid foramen"
+                ],
+                answer: 2,
+                explanation: "Infraorbital foramen (Page 11)"
+            },
+            {
+                question: "The zygomaticofacial foramen transmits the:",
+                options: [
+                    "Supraorbital nerve",
+                    "Infraorbital nerve",
+                    "Facial nerve",
+                    "Zygomaticofacial nerve"
+                ],
+                answer: 3,
+                explanation: "Zygomaticofacial nerve (Page 11)"
+            },
+            {
+                question: "Which bones form the Norma Verticalis?",
+                options: [
+                    "Frontal, Parietal, Temporal",
+                    "Parietal, Occipital, Temporal",
+                    "Frontal, Sphenoid, Occipital",
+                    "Frontal, Parietal, Occipital"
+                ],
+                answer: 3,
+                explanation: "Frontal, Parietal, Occipital (Page 13)"
+            },
+            {
+                question: "The suture that extends anteroposteriorly between the two parietal bones is the:",
+                options: [
+                    "Coronal suture",
+                    "Sagittal suture",
+                    "Lambdoid suture",
+                    "Squamous suture"
+                ],
+                answer: 1,
+                explanation: "Sagittal suture (Page 14)"
+            },
+            {
+                question: "The transverse suture that lies between the frontal and parietal bones is the:",
+                options: [
+                    "Coronal suture",
+                    "Sagittal suture",
+                    "Lambdoid suture",
+                    "Occipitomastoid suture"
+                ],
+                answer: 0,
+                explanation: "Coronal suture (Page 14)"
+            },
+            {
+                question: "The point of meeting of the sagittal and coronal sutures is the:",
+                options: [
+                    "Lambda",
+                    "Bregma",
+                    "Nasion",
+                    "Pterion"
+                ],
+                answer: 1,
+                explanation: "Bregma (Page 14)"
+            },
+            {
+                question: "The point of meeting of the sagittal and lambdoid sutures is the:",
+                options: [
+                    "Lambda",
+                    "Bregma",
+                    "Nasion",
+                    "Asterion"
+                ],
+                answer: 0,
+                explanation: "Lambda (Page 14)"
+            },
+            {
+                question: "Which bones form the Norma Occipitalis?",
+                options: [
+                    "Frontal, Parietal, Occipital",
+                    "Parietal, Occipital, Temporal",
+                    "Occipital, Temporal, Sphenoid",
+                    "Parietal, Temporal, Sphenoid"
+                ],
+                answer: 1,
+                explanation: "Parietal, Occipital, Temporal (Page 20)"
+            },
+            {
+                question: "The suture that extends downwards and laterally from the posterior end of the sagittal suture is the:",
+                options: [
+                    "Coronal suture",
+                    "Sagittal suture",
+                    "Lambdoid suture",
+                    "Squamous suture"
+                ],
+                answer: 2,
+                explanation: "Lambdoid suture (Page 21)"
+            },
+            {
+                question: "The median projection on the back of the skull that is palpable in the living is the:",
+                options: [
+                    "Inion",
+                    "External occipital crest",
+                    "Mastoid process",
+                    "External occipital protuberance"
+                ],
+                answer: 3,
+                explanation: "External occipital protuberance (Page 21)"
+            },
+            {
+                question: "The median ridge that extends from the external occipital protuberance down to the foramen magnum is the:",
+                options: [
+                    "Superior nuchal line",
+                    "External occipital crest",
+                    "Sagittal crest",
+                    "Lambdoid suture"
+                ],
+                answer: 1,
+                explanation: "External occipital crest (Page 21)"
+            },
+            {
+                question: "Which nuchal line extends laterally from the external occipital protuberance?",
+                options: [
+                    "Highest nuchal line",
+                    "Superior nuchal line",
+                    "Inferior nuchal line",
+                    "Median nuchal line"
+                ],
+                answer: 1,
+                explanation: "Superior nuchal line (Page 22)"
+            },
+            {
+                question: "The zygomatic arch is formed by the union of the temporal process of the zygomatic bone and the:",
+                options: [
+                    "Mastoid process of the temporal bone",
+                    "Styloid process of the temporal bone",
+                    "Zygomatic process of the temporal bone",
+                    "Coronoid process of the mandible"
+                ],
+                answer: 2,
+                explanation: "Zygomatic process of the temporal bone (Page 29)"
+            },
+            {
+                question: "The fossa located below the posterior end of the zygomatic arch that articulates with the head of the mandible is the:",
+                options: [
+                    "Mandibular fossa",
+                    "Coronoid fossa",
+                    "Olecranon fossa",
+                    "Pterygoid fossa"
+                ],
+                answer: 0,
+                explanation: "Mandibular fossa (Page 29)"
+            },
+            {
+                question: "The pointed process that projects downwards and forwards from the temporal bone is the:",
+                options: [
+                    "Mastoid process",
+                    "Styloid process",
+                    "Coronoid process",
+                    "Condylar process"
+                ],
+                answer: 1,
+                explanation: "Styloid process (Page 30)"
+            },
+            {
+                question: "The rounded process located behind the external acoustic meatus is the:",
+                options: [
+                    "Mastoid process",
+                    "Styloid process",
+                    "Zygomatic process",
+                    "Pterygoid process"
+                ],
+                answer: 0,
+                explanation: "Mastoid process (Page 30)"
+            },
+            {
+                question: "The area present above the external acoustic meatus is the:",
+                options: [
+                    "Mandibular fossa",
+                    "Infratemporal fossa",
+                    "Pterion",
+                    "Suprameatal triangle"
+                ],
+                answer: 3,
+                explanation: "Suprameatal triangle (Page 30)"
+            },
+            {
+                question: "The pterion is the junction of how many bones?",
+                options: [
+                    "Three",
+                    "Four",
+                    "Five",
+                    "Six"
+                ],
+                answer: 1,
+                explanation: "Four (Page 32)"
+            },
+            {
+                question: "Which bones meet at the pterion?",
+                options: [
+                    "Frontal, Parietal, Occipital, Temporal",
+                    "Frontal, Parietal, Temporal, Greater wing of sphenoid",
+                    "Frontal, Zygomatic, Temporal, Sphenoid",
+                    "Parietal, Occipital, Temporal, Sphenoid"
+                ],
+                answer: 1,
+                explanation: "Frontal, Parietal, Temporal, Greater wing of sphenoid (Page 32)"
+            },
+            {
+                question: "The bones at the pterion are joined by what shape of suture?",
+                options: [
+                    "X-shaped",
+                    "Y-shaped",
+                    "H-shaped",
+                    "T-shaped"
+                ],
+                answer: 2,
+                explanation: "H-shaped (Page 32)"
+            },
+            {
+                question: "The foramen located between the styloid and mastoid processes is the:",
+                options: [
+                    "Foramen ovale",
+                    "Foramen spinosum",
+                    "Stylomastoid foramen",
+                    "Jugular foramen"
+                ],
+                answer: 2,
+                explanation: "Stylomastoid foramen (Page 35)"
+            },
+            {
+                question: "Which nerve is transmitted through the stylomastoid foramen?",
+                options: [
+                    "Trigeminal nerve (V)",
+                    "Glossopharyngeal nerve (IX)",
+                    "Vagus nerve (X)",
+                    "Facial nerve (VII)"
+                ],
+                answer: 3,
+                explanation: "Facial nerve (VII) (Page 35)"
+            },
+            {
+                question: "Which view of the skull would best show the frontal eminence, superciliary arches, and anterior nasal opening?",
+                options: [
+                    "Norma Verticalis",
+                    "Norma Occipitalis",
+                    "Norma Frontalis",
+                    "Norma Basalis"
+                ],
+                answer: 2,
+                explanation: "Norma Frontalis (Page 5, 7)"
+            },
+            {
+                question: "Which feature is a characteristic of both Norma Verticalis and Norma Occipitalis?",
+                options: [
+                    "Zygomatic arch",
+                    "Lambdoid suture",
+                    "External acoustic meatus",
+                    "Orbital cavity"
+                ],
+                answer: 1,
+                explanation: "Lambdoid suture (Page 14, 21)"
+            },
+            {
+                question: "The zygomatic arch, mastoid process, and external acoustic meatus are all key features of which view?",
+                options: [
+                    "Norma Frontalis",
+                    "Norma Verticalis",
+                    "Norma Occipitalis",
+                    "Norma Lateralis"
+                ],
+                answer: 3,
+                explanation: "Norma Lateralis (Page 29, 30)"
+            }
+        ];
+
+        // Quiz state variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const totalScoreEl = document.getElementById('total-score');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreEl = document.getElementById('final-score');
+        const performanceMessageEl = document.getElementById('performance-message');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = quizData.length;
+            totalScoreEl.textContent = quizData.length;
+            showQuestion();
+            updateProgressBar();
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+        }
+
+        // Show current question
+        function showQuestion() {
+            currentQuestionEl.textContent = currentQuestion + 1;
+            scoreEl.textContent = score;
+            
+            const question = quizData[currentQuestion];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                let optionClass = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionClass += ' selected';
+                    if (index === question.answer) {
+                        optionClass += ' correct';
+                    } else {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        ${String.fromCharCode(65 + index)}) ${option}
+                    </div>
+                `;
+            });
+            
+            let feedbackHTML = '';
+            if (userAnswers[currentQuestion] !== null) {
+                const isCorrect = userAnswers[currentQuestion] === question.answer;
+                feedbackHTML = `
+                    <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                        ${isCorrect ? '✓ Correct!' : '✗ Incorrect!'} 
+                        ${!isCorrect ? `Correct answer: ${String.fromCharCode(65 + question.answer)}) ${question.options[question.answer]}` : ''}
+                        <br><br>Explanation: ${question.explanation}
+                    </div>
+                `;
+            }
+            
+            quizContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1}/${quizData.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                    ${feedbackHTML}
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const optionElements = quizContainer.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next';
+        }
+
+        // Select an option
+        function selectOption(e) {
+            if (userAnswers[currentQuestion] !== null) return; // Already answered
+            
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Check if answer is correct
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                score++;
+                scoreEl.textContent = score;
+            }
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            
+            finalScoreEl.textContent = score;
+            
+            // Performance message
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 80) {
+                message = 'Excellent! You have a strong understanding of Anatomy 3 Lecture No. 2.';
+            } else if (percentage >= 60) {
+                message = 'Good job! You have a solid grasp of the material.';
+            } else if (percentage >= 40) {
+                message = 'Not bad! Review the material and try again.';
+            } else {
+                message = 'Keep studying! Review the lectures and try again.';
+            }
+            
+            performanceMessageEl.textContent = message;
+            resultsContainer.style.display = 'block';
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.stats').style.display = 'flex';
+            resultsContainer.style.display = 'none';
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Initialize the quiz when the page loads
+        window.addEventListener('load', initQuiz);
+    </script>
+</body>
+</html>
